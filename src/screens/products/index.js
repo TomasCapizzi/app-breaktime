@@ -1,23 +1,24 @@
- import React, { useEffect } from 'react';
- import {
-   SafeAreaView,
+import {
    FlatList,
+   SafeAreaView,
    View,
- } from 'react-native';
-import { BREADS } from '../../utils/data/breads';
+} from 'react-native';
+import React, { useEffect } from 'react';
+import { filterTaza, selectTaza } from '../../store/actions/tazas.action';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterBreads, selectBread } from '../../store/actions/breads.action';
+
 import ProductItem from '../../components/products-item/index';
+import { TAZAS } from '../../utils/data/tazas';
 import styles from './styles';
- 
- const Products = ({navigation, route}) => {
+
+const Products = ({navigation, route}) => {
   
   const dispatch = useDispatch();
-  const categoryBreads = useSelector(state => state.breads.filteredBread)
+  const categoryTazas = useSelector(state => state.tazas.filteredTaza)
   const category = useSelector(state => state.categories.selected);
   
   const handleSelectedProduct = (item) => {
-    dispatch(selectBread(item.id));
+    dispatch(selectTaza(item.id));
     navigation.navigate('ProductDetail', 
       {
         name: item.name,
@@ -32,14 +33,14 @@ import styles from './styles';
   }
 
   useEffect(() => {
-    dispatch(filterBreads(category.id));
+    dispatch(filterTaza(category.id));
   }, [])
 
    return (
     <SafeAreaView style={styles.container}>
     <View style={styles.container}>
       <FlatList
-         data={categoryBreads}
+         data={categoryTazas}
          renderItem={renderProducts}
          keyExtractor={item => item.id}
        />

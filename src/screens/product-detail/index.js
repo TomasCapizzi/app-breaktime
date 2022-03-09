@@ -14,19 +14,19 @@ import styles from './styles';
 
 const ProductDetail = ({navigation, route}) => {
    const dispatch = useDispatch();
-   const bread = useSelector(state => state.breads.selected);
+   const taza = useSelector(state => state.tazas.selected);
    const handleAddItemCart = () => {
-    dispatch(addItem(bread))
+    dispatch(addItem(taza))
     navigation.navigate('Categories')
    }
    
    return (
      <SafeAreaView style={styles.container}>
        <View style={styles.container}>
-       <Text style={styles.titulo}>{bread.name}</Text>
-         <Image source={bread.img} style={styles.img} />
-         <Text style={styles.text}>{bread.description}</Text>
-         <Text style={styles.precio}>$ {bread.price}</Text>
+       <Text style={styles.titulo}>{taza.name}</Text>
+         <Image source={taza.img} style={styles.img} />
+         <Text style={styles.text}>{taza.description}</Text>
+         <Text style={styles.precio}>$ {taza.price}</Text>
 
          <Button title="Agregar al carrito" onPress={() => handleAddItemCart()} color={COLORS.primary} />
        </View>
